@@ -48,6 +48,15 @@ print(contatore_parole)
 
 #Risolvendo parte 3 esercizio 2
 
+alfanumerici = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890'
+lista_lettere = list(testo)
+
+contatore_lettere = 0 
+for lettera in lista_lettere:
+    if lettera in alfanumerici:
+        contatore_parole = contatore_parole + 1
+
+print(contatore_parole)
 
 #Risolvendo parte 8 esercizio 2
 
