@@ -17,7 +17,7 @@ def is_pari(n):
     
     risultato = False
 
-    if n%2 == 0:
+    if n % 2 == 0:
         risultato = True
 
     return risultato
@@ -56,3 +56,18 @@ def main():
     numero_scelto = chiedi_intero()
 
     # valuta se continuare con quello che dice gemini ! verificare se lo abbiuamo fatto 
+
+
+
+
+
+
+#Risolvendo parte 5 esercizio 1 (in classe, è collegato a punto 3 e 4)
+
+def ricerca(lista):
+    for i in lista: 
+        if i % 5 == 0:
+            print(i)
+    
+        else: 
+            print("Non ci sono numeri divisibili per 5.")
