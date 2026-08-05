@@ -22,20 +22,6 @@ def is_pari(n):
 
     return risultato
 
-######
-
-def main():
-    numero = int( input('Dammi un numero: ') )  # casting a intero del numero dato dall'utente
-
-    print(type(numero))                             
-
-    result = is_pari(numero)
-
-    print(result)
-
-main()
-
-
 # Risolvendo parte 2 esercizio 1 
 
 def chiedi_intero():
@@ -44,22 +30,12 @@ def chiedi_intero():
     numero_intero = 0        # inizializzo a 0 la variabile numero_intero per entrare subito nel ciclo
 
     while numero_intero <= 0:                            
-        numero_intero = int( input('Dammi un numero intero positivo: '))
+        numero_intero = int( input('Dammi un numero intero positivo: '))  # casting a intero del numero dato dall'utente
 
         if numero_intero <= 0:
             print("Attenzione: devi inserire un numero intero positivo.")
         
     return numero_intero
-
-######
-
-def main():
-    numero_scelto = chiedi_intero() 
-
-    print(f"Hai scelto il numero: {numero_scelto}")
-
-main()
-
 
 # Risolvendo parte 3 esercizio 1 
 
@@ -80,36 +56,89 @@ def genera_lista(numero):
 
     return lista_risultati
 
-#####
-
-def main():
-    numero_scelto = chiedi_intero() 
-    
-    sequenza = genera_lista(numero_scelto)
-
-    print(sequenza)
-
-main()
-
-
 # Risolvendo parte 4 esercizio 1 
 
 def analizza_sequenza(lista):
     """Restituisce valore massimo, lunghezza e somma di tutti i numeri della lista generata nel punto 3"""
 
+    # trovo il massimo
+    massimo = lista[0]        # suppongo che il massimo sia il primo elemento della lista
     
+    for numero in lista:
+        if numero > massimo:
+            massimo = numero 
 
+    # trovo la somma
+    somma = 0 
+    
+    for numero in lista:
+        somma = somma + numero 
+        
+    #trovo la lunghezza
+    lunghezza = len(lista)
+        
+    return massimo, lunghezza, somma
 
-
-
-
-
-# Risolvendo parte 5 esercizio 1 (in classe, è collegato a punto 3 e 4)
+# Risolvendo parte 5 esercizio 1 
 
 def ricerca(lista):
+    """Scorre la lista e stampa solo i numeri divisibili per 5"""
+
+    trovato = False                     # supponiamo inizialmente di non aver trovato nulla 
+
     for i in lista: 
         if i % 5 == 0:
             print(i)
+
+            trovato = True
     
-        else: 
-            print("Non ci sono numeri divisibili per 5.")
+    if trovato == False:                # se la lista non contiene nessun multiplo di 5
+        print("Non ci sono numeri divisibili per 5.")
+
+
+######
+
+# Parte 6
+
+def main():
+    quantità = int( input('Quanti numeri vuoi testare? '))     # chiedo quanti numeri testare 
+
+    # variabili per tenere traccia del record assoluto
+    lunghezza_massima = 0
+    numero_vincente = 0
+
+    for i in range(quantità):
+        print(f"TEST NUMERO {i+1}")
+
+        # Parte 2
+        numero_scelto = chiedi_intero() 
+
+        print(f"Hai scelto il numero: {numero_scelto}")
+
+        # Parte 1                            
+        result = is_pari(numero_scelto)
+
+        print(result)
+
+        # Parte 3
+        sequenza = genera_lista(numero_scelto)
+
+        print(sequenza)
+
+        # Parte 4
+        massimo, lunghezza, somma = analizza_sequenza(sequenza)
+
+        print(f"Massimo: {massimo}, Lunghezza: {lunghezza}, Somma: {somma}")
+
+        # Parte 5
+        ricerca(sequenza)
+
+        # aggiorno i record
+        if lunghezza > lunghezza_massima:
+            lunghezza_massima = lunghezza
+            numero_vincente = numero_scelto
+
+    # stampo il riepilogo
+    print(f"Il numero che ha generato la sequenza più lunga è {numero_vincente} con {lunghezza_massima} numeri generati")
+
+main()
