@@ -1,3 +1,15 @@
+#
+# File: esercizio2.py
+#
+# Author: Ester Zuccheri
+#
+# Date: 2026/08/07
+#
+# Version: 1.0
+#
+# Description: risoluzione esercizio 2
+#
+
 testo = '''
 Day after day, day after day,
 We stuck, nor breath nor motion;
@@ -20,9 +32,9 @@ The water, like a witch's oils,
 Burnt green, and blue and white.
 '''
 
-#Risolvendo parte 1 esercizio 2
+# Risolvendo parte 1 esercizio 2
 
-#Divido il testo in base al carattere \n
+# Divido il testo in base al carattere \n
 
 lista_righe = testo.split('\n')
 
@@ -33,9 +45,9 @@ for riga in lista_righe:
 
 print(contatore)
 
-#Risolvendo parte 2 esercizio 2
+# Risolvendo parte 2 esercizio 2
 
-#Divido il testo in base al carattere ()
+# Divido il testo in base al carattere ()
 
 lista_parole = testo.split()
 
@@ -46,20 +58,67 @@ for parola in lista_parole:
 
 print(contatore_parole)
 
-#Risolvendo parte 3 esercizio 2
+# Risolvendo parte 3 esercizio 2
 
-alfanumerici = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890'
-lista_lettere = list(testo)
+# Utilizzo il metodo isalnum() per verificare se un carattere appartiene agli alfanumerici
 
-contatore_lettere = 0 
-for lettera in lista_lettere:
-    if lettera in alfanumerici:
-        contatore_parole = contatore_parole + 1
+lista_caratteri = list(testo) 
 
-print(contatore_parole)
+contatore_alfanumerici = 0
+for carattere in lista_caratteri:
+    if carattere.isalnum() == True:
+        contatore_alfanumerici = contatore_alfanumerici + 1
 
-#Risolvendo parte 8 esercizio 2
+print(contatore_alfanumerici)
 
-for indice in [2,]:
-    lista_lettere_riga = list(lista_righe[1])
-    print(lista_lettere_riga)
+# Risolvendo parte 4 esercizio 2
+
+lettera = str( input('Inserisci una lettera: ') )
+
+contatore_lettera = 0
+for carattere in lista_caratteri:
+    if carattere.lower() == lettera.lower():             # converto i caratteri e la lettera scelta in minuscolo
+        contatore_lettera = contatore_lettera + 1
+
+print(contatore_lettera)
+
+# Risolvendo parte 5 esercizio 2
+
+for i in range(len(lista_parole)):
+
+    parola = lista_parole[i].lower()                                    # converto in minuscolo l'elemento corrente 
+    
+    if 'day' in parola or 'water' in parola or 'about' in parola:       # usare 'in' invece di '==' permette di ignorare la punteggiatura attaccata
+        lista_parole[i] = 'PYTHON'
+
+print(lista_parole)
+
+# Risolvendo parte 6 esercizio 2
+
+lista_parole = testo.split()                             # creo nuovamente la lista parole a partire dal testo originale
+
+for i in range(len(lista_parole)):
+    if i % 2 == 0:                                       # le parole di indice pari sono quelle in posizione dispari
+        lista_parole[i] = lista_parole[i].upper()
+
+print(lista_parole)
+
+# Risolvendo parte 7 esercizio 2
+
+lista_righe = testo.split('\n')
+lista_righe.reverse()
+
+print(lista_righe)
+
+# Risolvendo parte 8 esercizio 2
+
+lista_righe = testo.split('\n')                          # lista_righe contiene anche le righe vuote 
+
+for i in range(len(lista_righe)):
+    if i == 2 or i == 7 or i == 12 or i == 17:
+        lista_righe[i] = lista_righe[i][::-1]            # utilizzo lo slicing con passo -1 per capovolgere la riga direttamente come stringa
+
+for riga in lista_righe:
+    print(riga) 
+
+# Risolvendo parte 9 esercizio 2
