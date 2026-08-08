@@ -122,3 +122,70 @@ for riga in lista_righe:
     print(riga) 
 
 # Risolvendo parte 9 esercizio 2
+
+lista_strofe = testo.split('\n\n')                            # divido il testo in strofe ossia blocchi di testo separati da una riga vuota
+
+parole_comuni = set()                                         # creo un set che conterrà le parole comuni
+
+for parola in lista_strofe[0].split():                        # estraggo le parole della prima strofa 
+    parola_pulita = parola.lower().strip(".,;:!'")            # rendo ogni parola minuscola ed elimino la punteggiatura con il metodo strip()
+    parole_comuni.add(parola_pulita)
+
+for i in range(1, len(lista_strofe)):                         # analizzo le strofe dalla seconda in poi
+    
+    parole_strofa_corrente = set()
+
+    for parola in lista_strofe[i].split():
+        parola_pulita = parola.lower().strip(".,;:!'")
+        parole_strofa_corrente.add(parola_pulita)
+
+    parole_comuni = parole_comuni & parole_strofa_corrente    # uso operatore di intersezione per mantenere solo le parole presenti in entrambi i set
+
+print(f"Le parole presenti in tutte le strofe sono:  {parole_comuni}") 
+
+# Risolvendo parte 10 esercizio 2
+
+lista_parole = testo.split()
+set_parole = set()                                      # creo un set in cui inserire le parole pulite in modo che vengano eliminati i doppioni
+
+for parola in lista_parole:
+    parola_pulita = parola.lower().strip(".,;:!'")
+    set_parole.add(parola_pulita)
+
+lista_unica = list(set_parole)                          # la consegna chiede una lista univoca quindi trasformo il set in lista
+
+lista_unica.sort(key = len)                             # uso il medoto sort con chiave di ordinamento len per ordinare le parole in base alla loro lunghezza
+
+print(lista_unica)
+
+# Risolvendo parte 11 esercizio 2
+
+dizionario_caratteri = {}
+
+for carattere in testo:                                    # il testo è una stringa che è un oggetto iterabile
+    carattere_minuscolo = carattere.lower()
+
+    if carattere_minuscolo in dizionario_caratteri:        # se il carattere è già presente nel dizionario incremento di 1 il valore corrispondete
+        dizionario_caratteri[carattere_minuscolo] = dizionario_caratteri[carattere_minuscolo] + 1
+
+    else:
+        dizionario_caratteri[carattere_minuscolo] = 1
+
+print(dizionario_caratteri)
+
+# Risolvendo parte 12 esercizio 2
+
+dizionario_alfanumerici = {}
+
+for carattere in testo:
+    if carattere.isalnum():
+
+        carattere_minuscolo = carattere.lower()
+
+        if carattere_minuscolo in dizionario_alfanumerici:
+            dizionario_alfanumerici[carattere_minuscolo] = dizionario_alfanumerici[carattere_minuscolo] + 1
+
+        else:
+            dizionario_alfanumerici[carattere_minuscolo] = 1
+
+print(dizionario_alfanumerici)
