@@ -11,6 +11,11 @@
 #
 
 import sys
+import argparse
+
+# NOTA: Prima di eseguire il programma esercizio3.py, commentare 
+# una tra la parte 5 e la parte 6, perché non è possibile far leggere 
+# gli argomenti contemporaneamente con argv e argparse senza creare conflitti.
 
 # Risolvendo parte 1 esercizio 3
 
@@ -91,3 +96,25 @@ else:
 
 # Risolvendo parte 6 esercizio 3
 
+parser = argparse.ArgumentParser(description = "Stampa gli auguri per una persona tra quelle in rubrica")
+
+parser.add_argument('--nome', help = "Nome e cognome della persona scelta")    # aggiungo i parametri attesi dal programma con il metodo add_argument
+
+args = parser.parse_args()                                                     # uso il metodo parse_args per leggere i dati inseriti dall'utente e salvati nella variabile "args"      
+
+nome_cercato = args.nome                                                       # estrae il nome inserito dall'utente nel terminale (dopo '--nome') e lo salva in una variabile
+
+if nome_cercato != None:
+
+    if nome_cercato in rubrica:
+        
+        dati = rubrica[nome_cercato]                                           # estraggo i dati della persona scelta
+        
+        if dati['sesso'] == 'M':
+            print(f"Caro {nome_cercato}, \nsei nato il {dati['giorno']} di {dati['mese']} del {dati['anno']} e quindi a breve compirai {dati['età']} anni. \nTi manderemo gli auguri a {dati['mail']}")
+
+        else:
+            print(f"Cara {nome_cercato}, \nsei nata il {dati['giorno']} di {dati['mese']} del {dati['anno']} e quindi a breve compirai {dati['età']} anni. \nTi manderemo gli auguri a {dati['mail']}")
+    
+    else:
+        print(f"Errore: {nome_cercato} non è in rubrica.")
