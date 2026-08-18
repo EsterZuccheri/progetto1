@@ -1,4 +1,17 @@
 #
+# File: esercizio5.py
+#
+# Author: Ester Zuccheri
+#
+# Date: 2026/08/18
+#
+# Version: 1.0
+#
+# Description: risoluzione esercizio 5
+#
+
+
+#
 # File: Otto_regine.py
 #
 # Author: E.Romelli, D.Tavagnacco
@@ -12,11 +25,9 @@
 #
 
 
-#Risolvendo parte 1 esercizio 5
-
 def stessa_diagonale(x0, y0, x1, y1):
-    '''Ritorna Vero se posizioni (x0, y0) e (x1, y1) sono sulla stessa "diagonale"
-    '''
+    '''Ritorna Vero se posizioni (x0, y0) e (x1, y1) sono sulla stessa "diagonale" '''
+
     # distanza lungo y
     dy = abs(y1 - y0)
     
@@ -58,52 +69,65 @@ def soluzione_ok(soluzione_posizioni):
             return False 
 
     # Se non è ritornato prima, 
-    # allora nessun incrocio trvato: posizioni della soluzione valide 
+    # allora nessun incrocio trovato: posizioni della soluzione valide 
     return True 
 
-
+# Risolvendo parte 1, 2, 3 esercizio 5
+# per risolvere parte 2 aggiungo contatore 'tentativi'
+# per risolvere parte 3 creo la lista delle soluzioni e aggiungo una condizione nell'if 
 
 import random
 import time 
 
 def main():
-    # inizializzo generatore permutazioni
-    random_generator = random.Random() 
-    
-    # preparo la "possibile soluzione" con posizoni da testare
-    scacchiera = list(range(8)) 
-    
-    # conto le soluzioni trovate, inizio da 0           
-    solutions = 0                 
-    
-    # misuro il tempo di partenza per la ricerca della soluzione
-    start_time = time.time() 
-    #creo un contatore che non viene azzerato
-    tempo_totale_iniziale = time.time()
 
-    # loop finchè non trovo una soluzione; per risolvere il punto 1 ho bisogno di trovare 10 soluzioni quindi il loop continua fino a quando trovo 10 soluzioni
+    random_generator = random.Random()         # inizializzo generatore permutazioni
+
+    scacchiera = list(range(8))                # preparo la "possibile soluzione" con posizoni da testare
+               
+    solutions = 0                              # conto le soluzioni trovate, inizio da 0                
+    
+    start_time = time.time()                   # misuro il tempo di partenza per la ricerca della soluzione
+    
+    tempo_totale_iniziale = time.time()        # creo un contatore che non viene azzerato
+    
+    tentativi = 0                              # creo contatore che tenga traccia del numero di tentativi 
+                                               # necessari per trovare soluzione valida
+
+    soluzioni_trovate = []                     # creo una lista vuota dove salvare le soluzioni valide
+
+    # loop finchè non trovo una soluzione; 
+    # per risolvere il punto 1 ho bisogno di trovare 10 soluzioni quindi il loop continua fino a quando trovo 10 soluzioni
     while solutions < 10:             
     
         # permutazione casuale della soluzione 'mescolando' posizioni
         random_generator.shuffle(scacchiera) 
         
-        # verifica se la permutazione casuale e' soluzione  
-        #if soluzione_ok(scacchiera) == True: 
-        if soluzione_ok(scacchiera): 
+        # mescolando la scacchiera ho fatto un primo tentativo 
+        tentativi = tentativi + 1 
+        
+        # verifica se la permutazione casuale è soluzione e verifico che sia unica 
+        # if soluzione_ok(scacchiera) == True: 
+        if soluzione_ok(scacchiera) and scacchiera not in soluzioni_trovate: 
             # se la soluzione è buona, scrive
-            print(f'Found solution {scacchiera} in {time.time() - start_time} s.')
+            print(f'Found solution {scacchiera} in {time.time() - start_time} s. (Tentativi: {tentativi})')
             
-            # incremento contatore soluzioni trovate (condizione stop loop)
-            solutions = solutions + 1      
+            soluzioni_trovate.append(scacchiera.copy())  # aggiungo la soluzione trovata alla lista
+                                                         # uso .copy() altrimenti il prossimo shuffle modifica anche questa soluzione salvata 
+
+            solutions = solutions + 1                    # incremento contatore soluzioni trovate (condizione stop loop)
             
-            # reset timer ricerca soluzione
-            start_time = time.time()
+            start_time = time.time()                     # reset timer ricerca soluzione
+
+            tentativi = 0                                # reset contatore tentativi per preparare ricerca prossima soluzione
 
     #calcolo il tempo totale impiegato per trovare le 10 soluzioni
     tempo_totale = time.time() - tempo_totale_iniziale
     
     #calcolo la media tra i tempi
-    print(tempo_totale/10)
+    print(f'Il tempo medio per trovare una soluzione è: {tempo_totale/10} s.')
 
 # chiamo la funzione principale 
 main()
+
+# continuare da punto 4 in poi
