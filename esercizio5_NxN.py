@@ -1,13 +1,13 @@
 #
-# File: esercizio5.py
+# File: esercizio5_NxN.py
 #
 # Author: Ester Zuccheri
 #
-# Date: 2026/08/18
+# Date: 2026/08/20
 #
 # Version: 1.0
 #
-# Description: risoluzione punti 1, 2, 3, 4 esercizio 5
+# Description: risoluzione punti 5, 6 esercizio 5
 #
 
 
@@ -72,19 +72,20 @@ def soluzione_ok(soluzione_posizioni):
     # allora nessun incrocio trovato: posizioni della soluzione valide 
     return True 
 
-# Risolvendo parte 1, 2, 3, 4 esercizio 5
-# per risolvere parte 2 aggiungo contatore 'tentativi'
-# per risolvere parte 3 aggiungo secondo if e sfrutto il dizionario conteggio_soluzioni
-# per risolvere parte 4 aggiungo condizione di else
 
 import random
 import time 
 
+# Risolvendo parte 5 esercizio 5
+
 def main():
+
+    # chiedo all'utente quando deve essere grande la scacchiera
+    N = int(input("Inserisci la dimensione della scacchiera: "))
 
     random_generator = random.Random()         # inizializzo generatore permutazioni
 
-    scacchiera = list(range(8))                # preparo la "possibile soluzione" con posizoni da testare
+    scacchiera = list(range(N))                # preparo la "possibile soluzione" con posizoni da testare
                
     solutions = 0                              # conto le soluzioni trovate, inizio da 0                
     
@@ -96,9 +97,7 @@ def main():
                                                # necessari per trovare soluzione valida
 
     conteggio_soluzioni = {}                   # creo un dizionario vuoto per contare soluzioni ripetute
-
-    # loop finchè non trovo una soluzione; 
-    # per risolvere il punto 1 ho bisogno di trovare 10 soluzioni quindi il loop continua fino a quando trovo 10 soluzioni
+ 
     while solutions < 10:             
     
         # permutazione casuale della soluzione 'mescolando' posizioni
@@ -137,5 +136,45 @@ def main():
     
     print(f'Le soluzioni sono ripetute: {conteggio_soluzioni}')
 
-# chiamo la funzione principale 
-main()
+# Risolvendo parte 6 esercizio 5
+
+def trova_n_massimo():
+
+    random_generator = random.Random()
+
+    N = 4                                   # parto da N=4 ossia la più piccola scacchiera con soluzioni
+
+    # ciclo che fa aumentare N finchè non veniamo fermati dal tempo
+    while True:  
+        print(f'Sto provando con N = {N} ... ')  
+
+        scacchiera = list(range(N)) 
+        start_time = time.time()
+
+        soluzione_trovata = False           # variabile booleana per tenere traccia se abbiamo superato o meno i 15 secondi
+        
+        # continuo a cercare soluzioni finchè non sono scaduti i 15 secondi
+        while (time.time() - start_time) < 15:
+            
+            random_generator.shuffle(scacchiera)
+
+            if soluzione_ok(scacchiera):
+
+                tempo_impiegato = time.time() - start_time
+                print(f'Soluzione per N = {N} trovata in {tempo_impiegato} s.')
+                soluzione_trovata = True
+                
+                break               # interrompo il ciclo while 
+
+        if soluzione_trovata == False:
+
+            print(f'Tempo scaduto! Non ho trovato soluzioni per N = {N} in 15 secondi.')
+            print(f'\nLa scacchiera più grande risolta è N = {N-1}.')
+
+            break                 # interrompo il ciclo iniziale 
+
+        N = N + 1                  # se trovo la soluzione in tempo aumento N di 1
+
+
+# chiamo la funzione desiderata
+trova_n_massimo()
