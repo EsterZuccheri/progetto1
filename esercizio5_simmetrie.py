@@ -76,3 +76,16 @@ def soluzione_ok(soluzione_posizioni):
 
 def ruota_90(soluzione):
     '''Prende una soluzione (lista) e la ruota di 90 gradi in senso orario'''
+
+    N = len(soluzione)
+    ruotata = [0] * N                # creo lista lunga N contenete solo zeri
+
+    for r in range(N):
+        # la nuova riga è 'c'; la nuova colonna è 'N - 1 - r'
+        c = soluzione[r]
+        ruotata[c] = (N - 1) - r 
+
+    return ruotata
+
+def genera_famiglia_simmetrica(soluzione):
+    '''Genera la lista con le 4 rotazioni 
