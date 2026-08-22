@@ -93,6 +93,56 @@ def genera_famiglia_simmetrica(soluzione):
     r_270 = ruota_90(r_180)
 
     # ritorno le 4 soluzioni sotto forma di tuple 
-    # uso le tuple 
+    # uso le tuple perchè nei st posso inserire solo oggetti immutabili (come le tuple)
     return [tuple(soluzione), tuple(r_90), tuple(r_180), tuple(r_270)]
+
+import random
+import time
+
+def main():
+    random_generator = random.Random()
+    scacchiera = list(range(8))
+
+    tutte_le_viste = set()               # creo set in cui salvare sia le configurazioni originali che le loro rotazioni
+    famiglie_uniche_trovate = []         # lista dove salvo le 5 famiglie trovate 
+
+    start_time = time.time()
+    tentativi = 0
+
+    # cerco esattamente 5 famiglie uniche
+    while len(famiglie_uniche_trovate) < 5:
+
+        random_generator.shuffle(scacchiera)
+        tentativi = tentativi + 1 
+
+        # controllo se la soluzione è valida 
+        if soluzione_ok(scacchiera):
+
+            scacchiera_tupla = tuple(scacchiera)
+
+            # controllo che la soluzione sia nuova e non sia la rotazione di un'altra
+            if scacchiera_tupla not in tutte_le_viste:
+                
+                famiglia = genera_famiglia_simmetrica(scacchiera)     # genero le sue 4 rotazioni
+                famiglie_uniche_trovate.append(famiglia)              # salvo la famiglia nella lista
+
+                # aggiungo tutte e 4 le rotazioni al set "tutte_le_visite"
+                for variante in famiglia:
+                    tutte_le_viste.add(variante)
+
+                print(f'Trovata famiglia {len(famiglie_uniche_trovate)} in {tentativi} tentativi.')
+                tentativi = 0        # reset contatore tentativi per la prossima ricerca
+
+    print(f'\nTempo totale: {time.time() - start_time} s.')
+    print(f'\nEcco le 5 soluzioni uniche con le loro rotazioni: ')
+
+    # uso enumerate() per avere automaticamente un contatore (indice) mentre scorro la lista
+    for indice, famiglia in enumerate(famiglie_uniche_trovate):
+        print(f'\nFAMIGLIA {indice + 1}: ')
+        print(f' Originale (0°): {famiglia[0]}')
+        print(f' Ruotata di 90°: {famiglia[1]}')
+        print(f' Ruotata di 180°: {famiglia[2]}')
+        print(f' Ruotata di 270°: {famiglia[3]}')
+
+main()
 
