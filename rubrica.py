@@ -61,49 +61,89 @@ class Rubrica:
 
     def APRI(self, nome_file):
         '''Apre una rubrica leggendola da un file (JSON oppure testo).'''
-
+        
+        # endswith controlla le ultime lettere per capire automaticamente che tipo di file sto aprendo
         if nome_file.endswith(".json"):
             with open(nome_file, "r") as f:       
                 self.data = json.load(f)
         
         elif nome_file.endswith(".txt"):
-            self.data = 
-
-        
-        print(f'Rubrica caricata con successo da {nome_del_file}')
+            self.data = {}
+            with open(nome_file, "r") as f:
+                for riga in f:
+                    elementi = riga.strip().split(", ")
+                    
+                    if len(elementi) >= 7:
+                        self.data[elementi[0]] = {
+                            "giorno": int(elementi[1]), "mese": elementi[2],
+                            "anno": int(elementi[3]), "età": int(elementi[4]),
+                            "sesso": elementi[5], "mail": elementi[6]
+                        }
+       
+        print(f'Rubrica caricata con successo da {nome_file}')
 
     def AGGIUNGI(self, nome, dettagli):
         '''Aggiunge un elemento alla rubrica. 
         Aggiunge una nuova voce al dizionario interno (self.data)
         'dettagli' è un dizionario contenente età, sesso, mail ...'''
 
+        # controllo che la rubrica sia stata aperta ossia che self.data non sia None 
+        if self.data is None:
+            print("Prima apri una rubrica.")
+            return                               # interrompo esecuzione del metodo
+        
         self.data[nome] = dettagli 
-        print(f'Contatto '{nome}' aggiunto con successo.')
+        print(f"Contatto '{nome}' aggiunto con successo.")
 
     def RIMUOVI(self, nome):
         '''Rimuove un elemento dalla rubrica dato il nome.'''
 
+        # controllo se la rubrica è vuota o non aperta
+        if self.data is None or len(self.data) == 0:
+            print("La rubrica è vuota.")
+            return
+
         # prima di rimuovere, verifico che il nome esista per evitare errori 
         if nome in self.data:
             del self.data[nome]
-            print(f'Contatto '{nome}' rimosso dalla rubrica.')
+            print(f"Contatto '{nome}' rimosso dalla rubrica.")
 
         else:
-            print(f'Errore: il contatto '{nome}' non esiste.')
+            print(f"Errore: il contatto '{nome}' non esiste.")
 
     def SALVA(self,nome): 
         '''Salva la rubrica su un file (JSON o testo)'''
 
-        with open(nome_del_file, "w", encoding="utf-8") as file_out:          # apro il file in modalità scrittura
+        # controllo se la rubrica è vuota o non aperta
+        if self.data is None or len(self.data) == 0:
+            print("La rubrica è vuota.")
+            return
+
+        if nome_file.endswith(".json"):
+            with open(nome_del_file, "w", encoding="utf-8") as file_out:        # apro il file in modalità scrittura
                                                                                 # encoding="utf-8" assicura che il file JSON sappia gestire caratteri speciali
-            json.dump(self.data, file_out, indent=4, ensure_ascii=False)        # scrivo contenuto del dizionario self.data in file_out                 
+                json.dump(self.data, file_out, indent=4, ensure_ascii=False)    # scrivo contenuto del dizionario self.data in file_out                 
                                                                                 # indent= 4 per mettere 4 spazi e andare a capo per ogni elemento
                                                                                 # ensure_ascii=False per dire a Python di non trasformare caratteri speciali in codice ascii
-        print(f'Rubrica salvata con successo in {nome_del_file}.')
+        
+        elif nome_file.endswith(".txt"):
+            with open(nome_file, "w", encoding="utf-8") as f:
+                for nome, d in self.data.items():
+                    # Ricrea la riga separata da virgole
+                    riga = f"{nome}, {d['giorno']}, {d['mese']}, {d['anno']}, {d['età']}, {d['sesso']}, {d['mail']}\n"
+                    f.write(riga)
+
+        print(f'Rubrica salvata con successo in {nome_file}.')
     
     def STAMPA(self, nome):
         '''Stampa tutte le informazioni di un contatto (dato il nome)'''
 
+        # controllo se la rubrica è vuota o non aperta
+        if self.data is None or len(self.data) == 0:
+            print("La rubrica è vuota.")
+            return
+        
+        # controllo se il nome esiste
         if nome in self.data:
             print(f'\nInformazioni di {nome}: ')
 
@@ -112,4 +152,4 @@ class Rubrica:
                 print(f'{chiave}: {valore}')
         
         else:
-            print(f'Il contatto '{nome}' non è presente in rubrica.')
+            print(f"Il contatto '{nome}' non è presente in rubrica.")
