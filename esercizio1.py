@@ -74,7 +74,7 @@ def analizza_sequenza(lista):
     for numero in lista:
         somma = somma + numero 
         
-    #trovo la lunghezza
+    # trovo la lunghezza
     lunghezza = len(lista)
         
     return massimo, lunghezza, somma
