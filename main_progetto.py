@@ -1,5 +1,5 @@
 #
-# File: cassa_viaggio.py
+# File: main_progetto.py
 #
 # Author: Ester Zuccheri
 #

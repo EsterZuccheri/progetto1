@@ -31,7 +31,7 @@ class CassaViaggio:
 
         # dati["budget"] estrae il numero, cls(...) crea la nuova cassa
         nuova_cassa = cls(dati["budget"])
-        # copio la lista delle spese dal file JSON alla nostra cassa
+        # copio la lista delle spese dal file JSON alla nuova cassa
         nuova_cassa.spese = dati["spese"]
 
         return nuova_cassa
@@ -46,7 +46,7 @@ class CassaViaggio:
             "costo": float(costo)
         }
         self.spese.append(spesa)
-        print(f"Spesa'{descrizione}' di {costo}€ aggiunta con successo.")
+        print(f"Spesa '{descrizione}' di {costo}€ aggiunta con successo.")
 
     def RIEPILOGO(self):
         '''Stampa l'elenco delle spese, calcola il totale e mostra il budget residuo'''
