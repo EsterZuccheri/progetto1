@@ -1,0 +1,9 @@
+{
+    "budget": 500.0,
+    "spese": [
+        {
+            "descrizione": "cena",
+            "costo": 50.0
+        }
+    ]
+}
