@@ -11,20 +11,6 @@
 #
 
 
-#
-# File: Otto_regine.py
-#
-# Author: E.Romelli, D.Tavagnacco
-#
-# Date: 2026/04/14
-#
-# Version: 1.0
-#
-# Description: Example program to solve 8 queen-like problem 
-#              using brute force + random approach
-#
-
-
 def stessa_diagonale(x0, y0, x1, y1):
     '''Ritorna Vero se posizioni (x0, y0) e (x1, y1) sono sulla stessa "diagonale" '''
 
