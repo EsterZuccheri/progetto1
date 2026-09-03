@@ -49,7 +49,7 @@ def soluzione_ok(soluzione_posizioni):
 
     for col in range(1, len(soluzione_posizioni)):
         # verifica se incrocia
-        #if incrocia_colonne(soluzione_posizioni, col) == True:
+        # if incrocia_colonne(soluzione_posizioni, col) == True:
         if incrocia_colonne(soluzione_posizioni, col):
             # stop se trova incroci, la soluzione non è valida
             return False 

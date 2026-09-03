@@ -118,6 +118,7 @@ if args.visualizza_chiave != None:
     else:
         print("Errore: Non hai inserito nessuna chiave! Avvia il programma scrivendo ad esempio: python file.py età")
 
+
 # Risolvendo parte 1 esercizio 4
 
 if args.crea_file == True:

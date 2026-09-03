@@ -45,8 +45,9 @@ args = parser.parse_args()
 
 if args.punto1 == True:
     
-    for nome, dati in rubrica.items():                             # il metodo items applicato ad un dizionario ne estrae contemporaneamente la sua chiave e valore
-                                                                   # alla variabile nome verrà associata la chiave esterna e a dati il dizionario interno
+    # il metodo items applicato ad un dizionario ne estrae contemporaneamente la sua chiave e valore
+    # alla variabile nome verrà associata la chiave esterna e a dati il dizionario interno
+    for nome, dati in rubrica.items():                             
         frase_finale = f"'{nome}'"
 
     for chiave, valore in dati.items():                            # applico items al dizionario interno dati
@@ -59,11 +60,14 @@ if args.lista_ordinata == True:
     lista_coppie = list()
 
     for nome, dati in rubrica.items():
-    
-        età = dati['età']                        # estraggo dal dizionario dati il valore corrispondente alla chiave 'età'
+        
+        # estraggo dal dizionario dati il valore corrispondente alla chiave 'età'
+        età = dati['età']                        
         lista_coppie.append([età, nome])
-
-    lista_coppie.sort()                          # ordino le età usando direttamente il metodo sort perchè considera automaticamente solo il primo elemento di ogni coppia (l'età)
+    
+    # ordino le età usando direttamente il metodo sort perchè considera 
+    # automaticamente solo il primo elemento di ogni coppia (l'età)
+    lista_coppie.sort()        
 
     for [età, nome] in lista_coppie:
 
@@ -96,8 +100,10 @@ if args.messaggio_auguri == True:
             print(f"Cara {nome}, \nsei nata il {dati['giorno']} di {dati['mese']} del {dati['anno']} e quindi a breve compirai {dati['età']} anni. \nTi manderemo gli auguri a {dati['mail']}")
     
 if args.visualizza_chiave != None:
-
-    if len(args.visualizza_chiave) > 1:                       # verifico che l'utente abbia scritto un argomento controllando se la lista argv contiene più di 1 elemento (un elemento è sempre il nome del file)
+    
+    # verifico che l'utente abbia scritto un argomento controllando 
+    # se la lista argv contiene più di 1 elemento (un elemento è sempre il nome del file)
+    if len(args.visualizza_chiave) > 1:                       
     
         chiave_scelta = args.visualizza_chiave     
         print (f"'Hai scelto di cercare: {chiave_scelta}")

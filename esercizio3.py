@@ -37,8 +37,10 @@ rubrica = {
 'Madoka Ayukawa': {'giorno': 25, 'mese': 'maggio', 'anno': 1969, 'età': 57, 'sesso': 'F', 'mail': 'madoka_sax@asahi_net.jp'}
 }
 
-for nome, dati in rubrica.items():           # il metodo items applicato ad un dizionario ne estrae contemporaneamente la sua chiave e valore
-                                             # alla variabile nome verrà associata la chiave esterna e a dati il dizionario interno
+# il metodo items applicato ad un dizionario ne estrae contemporaneamente la sua chiave e valore
+# alla variabile nome verrà associata la chiave esterna e a dati il dizionario interno
+for nome, dati in rubrica.items():           
+
     frase_finale = f"'{nome}'"
 
     for chiave, valore in dati.items():      # applico items al dizionario interno dati
@@ -55,7 +57,9 @@ for nome, dati in rubrica.items():
     età = dati['età']                        # estraggo dal dizionario dati il valore corrispondente alla chiave 'età'
     lista_coppie.append([età, nome])
 
-lista_coppie.sort()                          # ordino le età usando direttamente il metodo sort perchè considera automaticamente solo il primo elemento di ogni coppia (l'età)
+# ordino le età usando direttamente il metodo sort 
+# perchè considera automaticamente solo il primo elemento di ogni coppia (l'età)
+lista_coppie.sort()                          
 
 for [età, nome] in lista_coppie:
 
@@ -81,7 +85,9 @@ for nome, dati in rubrica.items():
     
 # Risolvendo parte 5 esercizio 3
 
-if len(sys.argv) > 1:                       # verifico che l'utente abbia scritto un argomento controllando se la lista argv contiene più di 1 elemento (un elemento è sempre il nome del file)
+# verifico che l'utente abbia scritto un argomento controllando se la lista argv 
+# contiene più di 1 elemento (un elemento è sempre il nome del file)
+if len(sys.argv) > 1:                       
     
     chiave_scelta = sys.argv[1]     
     print (f"'Hai scelto di cercare: {chiave_scelta}")
@@ -98,17 +104,18 @@ else:
 
 parser = argparse.ArgumentParser(description = "Stampa gli auguri per una persona tra quelle in rubrica")
 
-parser.add_argument('--nome', help = "Nome e cognome della persona scelta")    # aggiungo i parametri attesi dal programma con il metodo add_argument
-
-args = parser.parse_args()                                                     # uso il metodo parse_args per leggere i dati inseriti dall'utente e salvati nella variabile "args"      
-
-nome_cercato = args.nome                                                       # estrae il nome inserito dall'utente nel terminale (dopo '--nome') e lo salva in una variabile
+# aggiungo i parametri attesi dal programma con il metodo add_argument
+parser.add_argument('--nome', help = "Nome e cognome della persona scelta")    
+# uso il metodo parse_args per leggere i dati inseriti dall'utente e salvarli nella variabile "args"
+args = parser.parse_args()                                                           
+# estrae il nome inserito dall'utente nel terminale (dopo '--nome') e lo salva in una variabile
+nome_cercato = args.nome                                                       
 
 if nome_cercato != None:
 
     if nome_cercato in rubrica:
         
-        dati = rubrica[nome_cercato]                                           # estraggo i dati della persona scelta
+        dati = rubrica[nome_cercato]                  # estraggo i dati della persona scelta
         
         if dati['sesso'] == 'M':
             print(f"Caro {nome_cercato}, \nsei nato il {dati['giorno']} di {dati['mese']} del {dati['anno']} e quindi a breve compirai {dati['età']} anni. \nTi manderemo gli auguri a {dati['mail']}")
