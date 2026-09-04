@@ -150,7 +150,7 @@ def trova_n_massimo():
                 print(f'Soluzione per N = {N} trovata in {tempo_impiegato} s.')
                 soluzione_trovata = True
                 
-                break               # interrompo il ciclo while 
+                break             # interrompo il ciclo while 
 
         if soluzione_trovata == False:
 
@@ -159,7 +159,7 @@ def trova_n_massimo():
 
             break                 # interrompo il ciclo iniziale 
 
-        N = N + 1                  # se trovo la soluzione in tempo aumento N di 1
+        N = N + 1                 # se trovo la soluzione in tempo aumento N di 1
 
 
 # chiamo la funzione desiderata

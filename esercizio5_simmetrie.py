@@ -58,6 +58,7 @@ def soluzione_ok(soluzione_posizioni):
     # allora nessun incrocio trovato: posizioni della soluzione valide 
     return True 
 
+
 # Risolvendo parte 7 esercizio 5
 
 def ruota_90(soluzione):
@@ -79,7 +80,7 @@ def genera_famiglia_simmetrica(soluzione):
     r_270 = ruota_90(r_180)
 
     # ritorno le 4 soluzioni sotto forma di tuple 
-    # uso le tuple perchè nei st posso inserire solo oggetti immutabili (come le tuple)
+    # uso le tuple perchè nei set posso inserire solo oggetti immutabili (come le tuple)
     return [tuple(soluzione), tuple(r_90), tuple(r_180), tuple(r_270)]
 
 import random
